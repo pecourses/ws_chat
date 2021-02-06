@@ -23,7 +23,7 @@ io.on('connect', socket => {
       const newMessageInstance = await Message.create(newMessageBody);
       io.emit(CHAT_EVENTS.NEW_MESSAGE, JSON.stringify(newMessageInstance));
     } catch (err) {
-      io.emit(CHAT_EVENTS.NEW_MESSAGE_ERROR, JSON.stringify(err));
+      socket.emit(CHAT_EVENTS.NEW_MESSAGE_ERROR, JSON.stringify(err));
     }
   });
 });

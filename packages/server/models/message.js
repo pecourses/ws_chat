@@ -3,7 +3,8 @@ const { Schema, model } = require('mongoose');
 const messageSchema = new Schema({
   text: {
     type: String,
-    required: true
+    required: true,
+    maxlength: 512
   }
 }, {
   timestamps: true

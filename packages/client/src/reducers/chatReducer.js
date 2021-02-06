@@ -3,6 +3,7 @@ import { produce } from 'immer';
 
 const initialState = {
   messages: [],
+  limit: 60,
   isFetching: false,
   error: null
 };
@@ -29,10 +30,19 @@ const chatReducer = (state = initialState, action) => {
         draftState.isFetching = false;
       });
     }
+    /// 5 9 6 3
+    /// 9 6 3
     case ACTION_TYPES.NEW_MESSAGE_SUCCESS: {
       const { payload: { data } } = action;
       return produce(state, draftState => {
-        draftState.messages.push(data);
+        if (draftState.messages.length >= draftState.limit) {
+          draftState.messages = [
+            ...draftState.messages.slice(1),
+            data
+          ];
+        } else {
+          draftState.messages.push(data);
+        }
       });
     }
     case ACTION_TYPES.NEW_MESSAGE_FAIL: {
