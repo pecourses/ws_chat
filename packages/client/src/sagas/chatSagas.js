@@ -7,13 +7,9 @@ export function * getMessagesSaga () {
 
   try {
     const { data: { data: messages } } = yield API.getMessages();
-    yield put(getMessagesSuccess({
-      payload: { data: messages }
-    }));
+    yield put(getMessagesSuccess(messages));
   } catch (error) {
-    yield put(getMessagesFail({
-      payload: { error }
-    }));
+    yield put(getMessagesFail(error));
   }
 }
 

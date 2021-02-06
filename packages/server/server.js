@@ -5,7 +5,11 @@ const { Message } = require('./models');
 
 const httpServer = http.createServer(app);
 
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://192.168.1.148:3000'
+  }
+});
 
 const CHAT_EVENTS = {
   NEW_MESSAGE: 'NEW_MESSAGE',

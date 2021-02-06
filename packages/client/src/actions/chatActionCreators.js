@@ -18,7 +18,7 @@ export const getMessagesFail = err => ({
   payload: { error: err }
 });
 
-export const newNessageAction = data => ({
+export const newMessageAction = data => ({
   type: ACTION_TYPES.NEW_MESSAGE_ACTION,
   payload: { data }
 });

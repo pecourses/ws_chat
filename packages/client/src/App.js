@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { bindActionsCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import * as chatActionCreators from './actions/chatActionCreators';
 import { Formik, Form, Field } from 'formik';
 
 function App () {
   const { messages, error, isFetching } = useSelector(state => state.chat);
   const dispatch = useDispatch();
-  const { getMessagesAction, newMessagesAction } = bindActionsCreators(chatActionCreators, dispatch);
+  const { getMessagesAction, newMessageAction } = bindActionCreators(chatActionCreators, dispatch);
 
   useEffect(() => {
     getMessagesAction();
@@ -17,7 +17,7 @@ function App () {
     <>
       <Formik
         initialValues = {{ text: '' }}
-        onSubmit={values => newMessagesAction(values)}
+        onSubmit={values => newMessageAction(values)}
       >
       {formik => <Form>
         <Field name='text'></Field>
@@ -25,7 +25,7 @@ function App () {
       </Form>}
       </Formik>
       <ol>
-        {messages.map(m => <li key={m._id}>m.text</li>)}
+        {messages.map(m => <li key={m._id}>{m.text}</li>)}
         {isFetching && <li>Loading...</li>}
         {error && <li>Error</li>}
       </ol>

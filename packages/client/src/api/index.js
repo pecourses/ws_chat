@@ -28,6 +28,6 @@ export const sendMessage = data => {
 };
 
 // http
-const apiInstance = axios.create({ baseURL: 'http://localhost:5000/api' });
+const apiInstance = axios.create({ baseURL: 'http://192.168.1.148:5000/api' });
 
-export const getMessages = () => { apiInstance.get('/messages'); };
+export const getMessages = () => apiInstance.get('/messages');
